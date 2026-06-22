@@ -1,0 +1,21 @@
+# create_style_model.py
+import torch
+import torch.nn as nn
+
+class MusicStyleModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(512, 256)
+        self.fc2 = nn.Linear(256, 128)
+        self.fc3 = nn.Linear(128, 64)
+        self.fc4 = nn.Linear(64, 10)  # number of style classes
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = torch.relu(self.fc3(x))
+        return self.fc4(x)
+
+# Create dummy weights
+model = MusicStyleModel()
+torch.save(model.state_dict(), 'models/music_style/style_model.pth')
