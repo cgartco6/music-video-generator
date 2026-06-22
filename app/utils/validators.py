@@ -211,4 +211,6 @@ class FaceDetection:
         for i in range(68):
             x = landmarks.part(i).x
             y = landmarks.part(i).y
-            cv2.circle(image, (x, y), 2, (0, 255,
+            cv2.circle(image, (x, y), 2, (0, 255, 0), -1)
+        
+        return image
