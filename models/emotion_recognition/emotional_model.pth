@@ -1,0 +1,20 @@
+# create_emotion_model.py
+import torch
+import torch.nn as nn
+
+class EmotionModel(nn.Module):
+    def __init__(self, num_emotions=8):
+        super().__init__()
+        self.fc1 = nn.Linear(512, 256)
+        self.fc2 = nn.Linear(256, 128)
+        self.fc3 = nn.Linear(128, num_emotions)
+        self.dropout = nn.Dropout(0.3)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = torch.relu(self.fc2(x))
+        return self.fc3(x)
+
+model = EmotionModel()
+torch.save(model.state_dict(), 'models/emotion_recognition/emotion_model.pth')
