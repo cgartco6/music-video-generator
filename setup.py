@@ -1,0 +1,30 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="music-video-generator",
+    version="2.0.0",
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=[
+        'Flask==2.3.3',
+        'flask-cors==4.0.0',
+        'flask-socketio==5.3.4',
+        'python-socketio==5.9.0',
+        'librosa==0.10.0',
+        'numpy==1.24.3',
+        'scipy==1.10.1',
+        'scikit-learn==1.3.0',
+        'opencv-python==4.8.0.74',
+        'Pillow==10.0.0',
+        'ffmpeg-python==0.2.0',
+        'python-dotenv==1.0.0',
+        'torch==2.0.1',
+        'torchvision==0.15.2',
+        'soundfile==0.12.1',
+        'audioread==3.0.0',
+        'resampy==0.4.2',
+        'joblib==1.3.2',
+        'requests==2.31.0'
+    ],
+    python_requires='>=3.8',
+)
