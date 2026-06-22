@@ -1,0 +1,15 @@
+# generate_voices.py
+import numpy as np
+import soundfile as sf
+
+def generate_sine_wave(freq, duration, sr=16000):
+    t = np.linspace(0, duration, int(sr * duration))
+    return 0.5 * np.sin(2 * np.pi * freq * t)
+
+# Generate male singer (lower pitch)
+male_audio = generate_sine_wave(110, 3)
+sf.write('voices/default/male_singer.wav', male_audio, 16000)
+
+# Generate female singer (higher pitch)
+female_audio = generate_sine_wave(220, 3)
+sf.write('voices/default/female_singer.wav', female_audio, 16000)
