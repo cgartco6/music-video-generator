@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Music Video Creator Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 AI Music Video Creator Pro</h1>
+            <p>Upload your song and let AI create a professional music video with realistic characters, lip sync, and visual effects</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-zone-content">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 16v-6m0 0l-3 3m3-3l3 3M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <p>Drop your audio file here or click to browse</p>
+                        <small>Supports MP3, WAV, FLAC, M4A (Max 50MB)</small>
+                    </div>
+                    <input type="file" id="fileInput" accept=".mp3,.wav,.flac,.m4a" hidden>
+                </div>
+                <div class="file-info" id="fileInfo" style="display:none;">
+                    <div class="file-details">
+                        <span id="fileName"></span>
+                        <span id="fileSize"></span>
+                        <span id="fileEmotion" class="emotion-badge"></span>
+                    </div>
+                    <button class="remove-file" id="removeFile">×</button>
+                </div>
+            </div>
+
+            <!-- Character Selection -->
+            <div class="character-section">
+                <h2>👤 Character Selection</h2>
+                <div class="character-grid" id="characterGrid">
+                    <div class="character-card" data-type="male_singer">
+                        <div class="character-preview" style="background: linear-gradient(135deg, #e74c3c, #c0392b);"></div>
+                        <h3>Male Singer</h3>
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                            <span>Select</span>
+                        </label>
+                    </div>
+                    <div class="character-card" data-type="female_singer">
+                        <div class="character-preview" style="background: linear-gradient(135deg, #e91e8c, #9b59b6);"></div>
+                        <h3>Female Singer</h3>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span>Select</span>
+                        </label>
+                    </div>
+                    <div class="character-card" data-type="band_member">
+                        <div class="character-preview" style="background: linear-gradient(135deg, #3498db, #2ecc71);"></div>
+                        <h3>Band Member</h3>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span>Select</span>
+                        </label>
+                    </div>
+                    <div class="character-card" data-type="dancer">
+                        <div class="character-preview" style="background: linear-gradient(135deg, #2ecc71, #f39c12);"></div>
+                        <h3>Dancer</h3>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span>Select</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customization Options -->
+            <div class="customization-section">
+                <h2>🎨 Customization</h2>
+                <div class="customization-grid">
+                    <div class="custom-group">
+                        <label>Hairstyle</label>
+                        <select id="hairstyle">
+                            <option value="medium">Medium</option>
+                            <option value="long">Long</option>
+                            <option value="short">Short</option>
+                            <option value="curly">Curly</option>
+                            <option value="straight">Straight</option>
+                            <option value="ponytail">Ponytail</option>
+                            <option value="bun">Bun</option>
+                        </select>
+                    </div>
+                    <div class="custom-group">
+                        <label>Outfit Style</label>
+                        <select id="outfit">
+                            <option value="casual">Casual</option>
+                            <option value="formal">Formal</option>
+                            <option value="rock">Rock</option>
+                            <option value="pop">Pop</option>
+                            <option value="classic">Classic</option>
+                            <option value="modern">Modern</option>
+                        </select>
+                    </div>
+                    <div class="custom-group">
+                        <label>Ethnicity</label>
+                        <select id="ethnicity">
+                            <option value="caucasian">Caucasian</option>
+                            <option value="african">African</option>
+                            <option value="asian">Asian</option>
+                            <option value="hispanic">Hispanic</option>
+                            <option value="middle_eastern">Middle Eastern</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhancement Options -->
+            <div class="enhancement-section">
+                <h2>✨ AI Enhancements</h2>
+                <div class="enhancement-grid">
+                    <div class="enhancement-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="enableStyleTransfer" checked>
+                            <span>Style Transfer</span>
+                        </label>
+                        <select id="genre">
+                            <option value="pop">Pop</option>
+                            <option value="rock">Rock</option>
+                            <option value="classical">Classical</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="hiphop">Hip Hop</option>
+                            <option value="country">Country</option>
+                            <option value="indie">Indie</option>
+                        </select>
+                    </div>
+                    <div class="enhancement-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="enableColorGrading" checked>
+                            <span>Color Grading</span>
+                        </label>
+                        <select id="colorStyle">
+                            <option value="cinematic">Cinematic</option>
+                            <option value="vibrant">Vibrant</option>
+                            <option value="vintage">Vintage</option>
+                            <option value="dark">Dark</option>
+                            <option value="dreamy">Dreamy</option>
+                        </select>
+                    </div>
+                    <div class="enhancement-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="enableFaceEnhancement" checked>
+                            <span>Face Enhancement</span>
+                        </label>
+                    </div>
+                    <div class="enhancement-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="enableEmotionDriven" checked>
+                            <span>Emotion-Driven Scenes</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn generate-btn" id="generateBtn" disabled>
+                    Generate Music Video
+                </button>
+                <div class="progress" id="progress" style="display:none;">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                    <span class="progress-message" id="progressMessage">Initializing...</span>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section" id="videoSection" style="display:none;">
+                <h2>🎬 Your Music Video</h2>
+                <div class="video-container">
+                    <video id="videoPlayer" controls>
+                        <source id="videoSource" src="">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-info" id="videoInfo"></div>
+                <div class="video-controls">
+                    <button class="btn download-btn" id="downloadBtn">📥 Download Video</button>
+                    <button class="btn share-btn" id="shareBtn">📤 Share</button>
+                    <button class="btn regenerate-btn" id="regenerateBtn">🔄 Regenerate</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by AI - Professional Music Video Generator v2.0</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
