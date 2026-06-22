@@ -1,0 +1,27 @@
+# Custom Voices Directory
+
+Place your custom voice reference audio files here for voice cloning.
+
+## Supported Formats
+- WAV (16kHz, mono recommended)
+- MP3 (will be converted)
+- FLAC
+
+## File Naming
+- Use descriptive names: `my_singer_voice.wav`
+- The name (without extension) will be used as the voice identifier
+
+## Requirements
+- Clean audio with minimal background noise
+- 30-60 seconds of voice/singing
+- Consistent pitch and tone
+- Avoid reverb or echo
+
+## Usage
+1. Place your audio file in this directory.
+2. The system will automatically detect it when you train a voice.
+3. You can also upload through the web interface.
+
+## Example
+- `john_doe_voice.wav`
+- `rock_singer.wav`
