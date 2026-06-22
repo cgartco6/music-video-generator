@@ -1,0 +1,26 @@
+# create_stylegan2.py
+import torch
+import torch.nn as nn
+
+class StyleGAN2Generator(nn.Module):
+    def __init__(self, latent_dim=512, resolution=512):
+        super().__init__()
+        self.latent_dim = latent_dim
+        self.resolution = resolution
+        # Simplified architecture
+        self.fc = nn.Linear(latent_dim, 512*4*4)
+        self.conv1 = nn.ConvTranspose2d(512, 256, 4, stride=2, padding=1)
+        self.conv2 = nn.ConvTranspose2d(256, 128, 4, stride=2, padding=1)
+        self.conv3 = nn.ConvTranspose2d(128, 64, 4, stride=2, padding=1)
+        self.conv4 = nn.ConvTranspose2d(64, 3, 4, stride=2, padding=1)
+        self.lrelu = nn.LeakyReLU(0.2)
+
+    def forward(self, z):
+        x = self.fc(z).view(-1, 512, 4, 4)
+        x = self.lrelu(self.conv1(x))
+        x = self.lrelu(self.conv2(x))
+        x = self.lrelu(self.conv3(x))
+        return torch.tanh(self.conv4(x))
+
+model = StyleGAN2Generator()
+torch.save(model.state_dict(), 'models/face_generation/stylegan2.pth')
