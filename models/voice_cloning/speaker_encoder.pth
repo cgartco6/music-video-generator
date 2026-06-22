@@ -1,0 +1,18 @@
+# create_speaker_encoder.py
+import torch
+import torch.nn as nn
+
+class SpeakerEncoder(nn.Module):
+    def __init__(self, embed_dim=256):
+        super().__init__()
+        self.lstm = nn.LSTM(40, 256, 3, batch_first=True, bidirectional=True)
+        self.fc = nn.Linear(512, embed_dim)
+
+    def forward(self, x):
+        # x: (batch, time, 40) - MFCC features
+        out, _ = self.lstm(x)
+        out = out.mean(dim=1)  # average pooling
+        return self.fc(out)
+
+model = SpeakerEncoder()
+torch.save(model.state_dict(), 'models/voice_cloning/speaker_encoder.pth')
