@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Music Video Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-white">
+  <div class="max-w-4xl mx-auto p-8">
+    <h1 class="text-5xl font-bold mb-2">🎬 AI Music Video Studio</h1>
+    <p class="text-zinc-400 mb-8">Upload song • Realistic singers • Full video</p>
+
+    <div class="bg-zinc-900 rounded-3xl p-8">
+      <input type="file" id="song" accept="audio/*" class="block w-full mb-6 p-4 bg-zinc-800 rounded-2xl">
+
+      <div class="grid grid-cols-2 gap-6 mb-8">
+        <div>
+          <label class="block text-sm mb-2">Male Singer</label>
+          <input id="male" placeholder="Jax Blaze" class="w-full p-4 bg-zinc-800 rounded-2xl">
+        </div>
+        <div>
+          <label class="block text-sm mb-2">Female Singer</label>
+          <input id="female" placeholder="Luna Vox" class="w-full p-4 bg-zinc-800 rounded-2xl">
+        </div>
+      </div>
+
+      <button onclick="generateVideo()" class="w-full py-6 bg-violet-600 hover:bg-violet-700 rounded-3xl text-xl font-bold">
+        Generate Realistic Music Video
+      </button>
+    </div>
+
+    <div id="status" class="mt-8 p-6 bg-zinc-900 rounded-3xl hidden"></div>
+  </div>
+
+  <script>
+    async function generateVideo() {
+      const status = document.getElementById('status');
+      status.classList.remove('hidden');
+      status.innerHTML = `<p class="text-green-400">Generating full realistic video with male & female singers...</p>`;
+
+      // Simulate API call
+      setTimeout(() => {
+        status.innerHTML = `
+          <p class="text-green-400 font-bold">✅ Video Ready!</p>
+          <p>Male: ${document.getElementById('male').value || 'Jax Blaze'}</p>
+          <p>Female: ${document.getElementById('female').value || 'Luna Vox'}</p>
+          <a href="#" class="text-blue-400 underline block mt-4">Download Full Video + Clips</a>
+        `;
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
