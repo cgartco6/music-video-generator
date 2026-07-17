@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Music Video Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen p-4">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-4xl font-bold text-center mb-8">🎵 AI Music Video Studio</h1>
+    
+    <div class="bg-zinc-900 rounded-3xl p-8">
+      <h2 class="text-2xl mb-4">1. Upload or Record Your Song</h2>
+      <input type="file" id="audio" accept="audio/*" class="block w-full mb-6 text-sm">
+      
+      <h2 class="text-2xl mb-4">2. Choose Singers</h2>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-sm mb-2">Male Singer Name</label>
+          <input id="male" value="Jax Blaze" class="w-full bg-zinc-800 p-3 rounded-xl">
+        </div>
+        <div>
+          <label class="block text-sm mb-2">Female Singer Name</label>
+          <input id="female" value="Luna Vox" class="w-full bg-zinc-800 p-3 rounded-xl">
+        </div>
+      </div>
+
+      <button onclick="generateVideo()" 
+              class="w-full bg-gradient-to-r from-purple-600 to-pink-600 py-6 rounded-2xl text-xl font-bold">
+        Generate Realistic Music Video
+      </button>
+    </div>
+
+    <div id="result" class="mt-8 text-center"></div>
+  </div>
+
+  <script>
+    function generateVideo() {
+      const result = document.getElementById('result');
+      result.innerHTML = `
+        <div class="bg-green-900/30 border border-green-500 rounded-3xl p-8">
+          <p class="text-green-400 text-lg">✅ Generating full song with:</p>
+          <ul class="text-left mt-4 space-y-2">
+            <li>• Accurate BPM, genre & instrument analysis</li>
+            <li>• Male + Female singers with realistic faces & movements</li>
+            <li>• Multiple camera angles</li>
+            <li>• Noise removed & style copied</li>
+          </ul>
+          <p class="mt-6 text-sm text-zinc-400">Demo version - In real version this would produce MP4</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
