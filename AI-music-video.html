@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Music Video Studio - Full Demo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: system-ui; background: #09090b; color: white; }
+  .card { background: #18181b; }
+</style>
+</head>
+<body class="p-6 max-w-3xl mx-auto">
+  <h1 class="text-4xl font-bold mb-8 text-center">AI Music Video Studio</h1>
+
+  <div class="card rounded-3xl p-8">
+    <h2 class="text-2xl mb-4">1. Record or Upload Song</h2>
+    <input type="file" id="songInput" accept="audio/*" class="block w-full mb-6 p-4 bg-zinc-800 rounded-2xl">
+
+    <h2 class="text-2xl mb-4">2. Singers & Style</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <label>Male Singer</label>
+        <input id="maleName" value="Jax Blaze" class="w-full p-3 bg-zinc-800 rounded-xl mt-1">
+      </div>
+      <div>
+        <label>Female Singer</label>
+        <input id="femaleName" value="Luna Vox" class="w-full p-3 bg-zinc-800 rounded-xl mt-1">
+      </div>
+    </div>
+
+    <button onclick="generateFullVideo()" 
+            class="w-full mt-10 py-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl text-xl font-bold">
+      Create Full Realistic Music Video
+    </button>
+  </div>
+
+  <div id="output" class="mt-8 card rounded-3xl p-8 hidden"></div>
+
+  <script>
+    function generateFullVideo() {
+      const output = document.getElementById('output');
+      output.classList.remove('hidden');
+      output.innerHTML = `
+        <h3 class="text-xl mb-6">Processing your song...</h3>
+        <ul class="space-y-3 text-green-400">
+          <li>✅ Noise removal from recording</li>
+          <li>✅ BPM, genre, instruments analyzed</li>
+          <li>✅ Male & Female singers created with custom style</li>
+          <li>✅ Band members generated</li>
+          <li>✅ Multiple camera angles & movements</li>
+          <li>✅ Full song + 30s clips rendered</li>
+        </ul>
+        <p class="mt-8 text-amber-400">In a real version this would download MP4 files.</p>
+        <button onclick="alert('Demo: Video would be saved here')" class="mt-6 px-8 py-3 bg-white text-black rounded-2xl">
+          Download Full Video
+        </button>
+      `;
+    }
+  </script>
+</body>
+</html>
